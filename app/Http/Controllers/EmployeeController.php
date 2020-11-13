@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -13,8 +14,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view ('employee.index');
-        dd('dfhfghks');
+        $employees=Employee::all();
+        return view ('employee.index',compact('employees'));
+        // dd('dfhfghks');
     }
 
     /**
@@ -24,7 +26,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        return view('employee.create');
     }
 
     /**
@@ -35,7 +37,22 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+        $this->validate($request, [
+            'documento' => 'integer',
+            'edad' => 'integer',
+            'numero_telefono' => 'integer',
+            'telefono_emergencia' => 'integer',
+            'rh' => 'max:4',
+            
+           
+        ]);
+
+        $input = request()->except('_token');
+       
+        Employee::create($input);
+
+        return redirect()->action('EmployeeController@index');
     }
 
     /**
