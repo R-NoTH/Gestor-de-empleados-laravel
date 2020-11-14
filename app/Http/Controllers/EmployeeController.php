@@ -62,8 +62,9 @@ class EmployeeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $data = Employee::find($id);
+        return view('employee.show',compact('data'));
     }
 
     /**
@@ -74,7 +75,9 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+
+       $data = Employee::find($id);
+        return view('employee.edit',compact('data'));
     }
 
     /**
@@ -86,7 +89,23 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       $data = Employee::findOrFail($id);
+
+        $this->validate($request, [
+            'documento' => 'integer',
+            'edad' => 'integer',
+            'numero_telefono' => 'integer',
+            'telefono_emergencia' => 'integer',
+            'rh' => 'max:4',
+            
+           
+        ]);
+
+        $input = $request->all();
+       
+        $data->fill($input)->save();
+
+        return redirect()->action('EmployeeController@index');
     }
 
     /**
@@ -97,6 +116,8 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd('0');
+        Employee::destroy($id);
+        return redirect()->action('EmployeeController@index');
     }
 }

@@ -1,5 +1,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    
+{{-- <link rel="stylesheet" href="../../../public/css/fontello.css"> --}}
+<link src="{{asset('css/fontello.css')}}">
 <style>
     .contenedor {
         width: 90px;
@@ -8,7 +12,7 @@
         right: 0px;
         bottom: 0px;
     }
-
+    
     .botonF1 {
         width: 50px;
         height: 50px;
@@ -26,19 +30,19 @@
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
         transition: .3s;
     }
-
+    
     span {
         transition: .5s;
     }
-
+    
     .botonF1:hover span {
         transform: rotate(360deg);
     }
-
+    
     .botonF1:active {
         transform: scale(1.3);
     }
-
+    
     .btn {
         width: 40px;
         height: 40px;
@@ -54,12 +58,12 @@
         margin-right: 26px;
         transform: scale(0);
     }
-
+    
     .animacionVer {
         transform: scale(1);
     }
-
-</style>
+    
+    </style>
 <table class="table table-striped">
     <thead class="thead-dark">
         <tr>
@@ -72,31 +76,42 @@
     </thead>
     <tbody>
         @foreach ($employees as $employee)
-            
+        
         <tr>
             <th>{{$employee->documento  }}</th>
             <th>{{$employee->name }}</th>
             <th>{{$employee->cargo }}</th>
-            <th>
-                {{-- <a href="" class="btn btn-secondary btn-lg active">sdfsdf</a> --}}
+            <td>
+                <a href="{{ route('employees.show',$employee->id)}}" >Show | </a>
+                <a href="{{ route('employees.edit',$employee->id)}}" >Edit</a><br>
                 
-            </th>
+                {{-- <form action="{{ action('EmployeeController@destroy', $employee->id) }} method="post">
+                    {{ csrf_field() }}
+                    @method('PUT')
+                    <a href="{{ route('employees.destroy',$employee->id)}}" >Eliminar</a>
+                    {{-- <a type="submit" onclick="return confirm ('¿Esta seguro de Eliminar?')"></a> --}}
+                   
+                </form> --}}
+                
+            </td>
+            
         </tr>
         
         @endforeach
     </tbody>
 </table>
 <div style="bottom: 50px; right: 19px;" class="fixed-action-btn direction-top"><a href="#"
-        class="btn-floating btn-large gradient-45deg-light-blue-cyan gradient-shadow"></a>
+    class="btn-floating btn-large gradient-45deg-light-blue-cyan gradient-shadow"></a>
     <div class="contenedor">
         <a href="{{ route('employees.create') }}">
             <button class="botonF1">
                 <span>+</span>
             </button>
         </a>
-
+        
     </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     $('.botonF1').hover(function() {
