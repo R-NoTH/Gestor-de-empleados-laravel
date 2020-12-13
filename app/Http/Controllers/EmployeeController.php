@@ -116,7 +116,7 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        dd('0');
+        // dd($id);
         Employee::destroy($id);
         return redirect()->action('EmployeeController@index');
     }

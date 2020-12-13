@@ -1,10 +1,10 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    
-{{-- <link rel="stylesheet" href="../../../public/css/fontello.css"> --}}
-<link src="{{asset('css/fontello.css')}}">
-<style>
+@include('layout.head')
+@include('layout.header')
+
+{{--
+<link rel="stylesheet" href="../../../public/css/fontello.css"> --}}
+<link src="{{ asset('css/fontello.css') }}">
+{{-- <style>
     .contenedor {
         width: 90px;
         height: 240px;
@@ -12,7 +12,7 @@
         right: 0px;
         bottom: 0px;
     }
-    
+
     .botonF1 {
         width: 50px;
         height: 50px;
@@ -30,19 +30,19 @@
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
         transition: .3s;
     }
-    
+
     span {
         transition: .5s;
     }
-    
+
     .botonF1:hover span {
         transform: rotate(360deg);
     }
-    
+
     .botonF1:active {
         transform: scale(1.3);
     }
-    
+
     .btn {
         width: 40px;
         height: 40px;
@@ -58,57 +58,77 @@
         margin-right: 26px;
         transform: scale(0);
     }
-    
+
     .animacionVer {
         transform: scale(1);
     }
-    
-    </style>
-<table class="table table-striped">
-    <thead class="thead-dark">
-        <tr>
-            {{-- <th scope="col">#</th> --}}
-            <th scope="col">Documento</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Cargo</th>
-            <th>@lang('app.actions')</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($employees as $employee)
-        
-        <tr>
-            <th>{{$employee->documento  }}</th>
-            <th>{{$employee->name }}</th>
-            <th>{{$employee->cargo }}</th>
-            <td>
-                <a href="{{ route('employees.show',$employee->id)}}" >Show | </a>
-                <a href="{{ route('employees.edit',$employee->id)}}" >Edit</a><br>
-                
-                {{-- <form action="{{ action('EmployeeController@destroy', $employee->id) }} method="post">
-                    {{ csrf_field() }}
-                    @method('PUT')
-                    <a href="{{ route('employees.destroy',$employee->id)}}" >Eliminar</a>
-                    {{-- <a type="submit" onclick="return confirm ('¿Esta seguro de Eliminar?')"></a> --}}
-                   
-                </form> --}}
-                
-            </td>
-            
-        </tr>
-        
-        @endforeach
-    </tbody>
-</table>
+
+</style> --}}
+<br>
+<div class="container-fluid">
+
+    <table class="table table-striped compact">
+        <thead class="thead-dark">
+            <tr>
+                {{-- <th scope="col">#</th> --}}
+                <th scope="col">Documento</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Cargo</th>
+                <th>@lang('app.actions')</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($employees as $employee)
+
+                <tr>
+                    <th>{{ $employee->documento }}</th>
+                    <th>{{ $employee->name }}</th>
+                    <th>{{ $employee->cargo }}</th>
+                    <td>
+                        <a  class="btn btn-primary" href="{{ route('employees.show', $employee->id) }}">Show | </a>
+                        <a class="btn btn-warning" href="{{ route('employees.edit', $employee->id) }}">Edit</a>
+                        <form action="{{ route('employees.destroy', $employee->id) }}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <button class="btn btn-danger m-1">Delete User</button>
+                        </form>
+
+                    </td>
+
+                    {{-- <td>
+                        <div class="btn-group">
+                            <button type="button" class="btn a_neumor" data-toggle="dropdown" aria-expanded="false">
+                                @lang('messages.action')
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+
+                                <li align="center">
+                                    <a id="animation-switcher"
+                                        val-route="{!!  route('employees.destroy', $employee->id) !!}"
+                                        class=" delete-anime">
+                                        <div class="item-checked" data-effect="mfp-rotateRight">@lang('messages.delete')
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td> --}}
+                </tr>
+
+            @endforeach
+        </tbody>
+    </table>
+</div>
 <div style="bottom: 50px; right: 19px;" class="fixed-action-btn direction-top"><a href="#"
-    class="btn-floating btn-large gradient-45deg-light-blue-cyan gradient-shadow"></a>
+        class="btn-floating btn-large gradient-45deg-light-blue-cyan gradient-shadow"></a>
     <div class="contenedor">
         <a href="{{ route('employees.create') }}">
             <button class="botonF1">
                 <span>+</span>
             </button>
         </a>
-        
+
     </div>
 </div>
 
