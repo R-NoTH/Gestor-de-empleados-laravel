@@ -44,8 +44,6 @@ class EmployeeController extends Controller
             'numero_telefono' => 'integer',
             'telefono_emergencia' => 'integer',
             'rh' => 'max:4',
-            
-           
         ]);
 
         $input = request()->except('_token');

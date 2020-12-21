@@ -17,5 +17,8 @@ Route::get('/', function () {
     return view('home');
 });
 
-    Route::resource('employees','EmployeeController');
+Route::resource('employees', 'EmployeeController');
 
+Route::get('panelControl', function () {
+    return view('panelControl.index');
+});

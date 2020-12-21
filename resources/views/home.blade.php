@@ -86,6 +86,8 @@
 
                 <div class="links">
                     <a href="{{ route('employees.index') }}">Table</a>
+                    <a href="{{ url('panelControl') }}">Panel Control</a>
+
                    
                 </div>
             </div>

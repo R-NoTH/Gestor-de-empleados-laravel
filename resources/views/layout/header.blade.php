@@ -1,21 +1,22 @@
 @include('layout.head')
-
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #617386;">
-    <a class="navbar-brand" href="#">
-        <i class="fas fa-home"></i>
-        Bootstrap
-      </a>
-    {{-- <a class="navbar-brand" href="{{ route('employees.index') }}"> Sst </a> --}}
+<body>
     
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #227ddd;">
+        <a class="navbar-brand" href="{{ url('/') }}">
+            <i class="fas fa-home"></i>
+            Bootstrap
+        </a>
+        {{-- <a class="navbar-brand" href="{{ route('employees.index') }}"> Sst </a> --}}
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
+    
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="{{ url('/') }}">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -36,4 +37,5 @@
         </ul>
     </div>
 </nav>
+</body>
 @include('layout.script')

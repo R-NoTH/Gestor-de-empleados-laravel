@@ -23,12 +23,12 @@ class CreateEmployeesTable extends Migration
             $table->date('fecha_nacimiento')->nullable();
             $table->string('lugar_nacimiento')->nullable();
             $table->integer('edad')->nullable();
-            $table->integer('numero_telefono')->nullable();
+            $table->string('numero_telefono')->nullable();
             $table->string('direccion')->nullable();
             $table->string('cargo')->nullable();
             $table->string('seccion')->nullable();
             $table->string('alergias_medicamento')->nullable();
-            $table->integer('telefono_emergencia')->nullable();
+            $table->string('telefono_emergencia')->nullable();
             $table->string('enfermedad_laboral')->nullable();
             $table->string('accidentes_trabajo')->nullable();
             $table->string('enfermedad_comun')->nullable();
