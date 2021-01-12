@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Employee;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class EmployeeController extends Controller
 {
@@ -14,9 +15,21 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees=Employee::all();
-        return view ('employee.index',compact('employees'));
+        // $employees=Employee::all();
+        return view ('employee.index');
         // dd('dfhfghks');
+    }
+    public function dataTable()
+    {
+        return DataTables::of(Employee::query())
+        ->addColumn('action', function(Employee $employee){
+            $actionBtn = '<a class="btn btn-secondary btn-sm" href="' . route('employees.edit', $employee->id) .'"><i
+            class="far fa-edit"></i></a>';
+            $actionBtn .= '&nbsp;<button type="button" id="'.$employee->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>';
+            return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->toJson();
     }
 
     /**
@@ -114,7 +127,7 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        // dd($id);
+        dd($id); 
         Employee::destroy($id);
         return redirect()->action('EmployeeController@index');
     }

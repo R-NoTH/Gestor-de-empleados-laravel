@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::resource('employees', 'EmployeeController');
+Route::get('employeesDataTable', 'EmployeeController@dataTable')->name('employeesDataTable');
 
 Route::get('panelControl', function () {
     return view('panelControl.index');
