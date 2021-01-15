@@ -2,8 +2,8 @@
 @include('layout.header')
 <div class="container">
     <br>
+    <h5 class="card-header">Registro de Empleados</h5>
     <div class="card">
-        <h5 class="card-header">Employee</h5>
         <div class="card-body">
             <form action="{{ action('EmployeeController@store') }}" method="post">
                 {{ csrf_field() }}
@@ -22,12 +22,12 @@
 
                         <div class="col s6">
                             <label for="foto">Foto</label>
-                            <input type="text" class="form-control" placeholder="foto" name="foto"
+                            <input type="text" class="form-control"  name="foto"
                                 value="{{ old('foto') }}">
                         </div>
                         <div class="col s6">
-                            <label for="name">Nombre</label>
-                            <input type="text" class="form-control" placeholder="name" name="name"
+                            <label for="name">Nombre Completo</label>
+                            <input type="text" class="form-control" name="name"
                                 value="{{ old('name') }}">
                         </div>
 
@@ -38,15 +38,16 @@
                         <div class="col s6">
                             <label for="documento">Documento</label>
 
-                            <input type="text" class="form-control" placeholder="documento" name="documento"
+                            <input type="text" class="form-control"  name="documento"
                                 value="{{ old('documento') }}">
                         </div>
 
                         <div class="col s6">
                             <label for="sexo">Sexo</label>
-
-                            <input type="text" class="form-control" placeholder="sexo" name="sexo"
-                                value="{{ old('sexo') }}">
+                                <select class="form-control" name="sexo" >
+                                    <option value="Mujer">Mujer</option>
+                                    <option value="Hombre">Hombre</option>
+                                  </select>
                         </div>
 
                     </div>
@@ -56,13 +57,13 @@
                         <div class="col s6">
                             <label for="rh">Rh</label>
 
-                            <input type="text" class="form-control" placeholder="rh" name="rh" value="{{ old('rh') }}">
+                            <input type="text" class="form-control"  name="rh" value="{{ old('rh') }}">
                         </div>
 
                         <div class="col s6">
                             <label for="fecha_nacimiento">Fecha de Nacimiento</label>
 
-                            <input type="date" class="form-control" placeholder="fecha de nacimiento"
+                            <input type="date" class="form-control" 
                                 name="fecha_nacimiento" value="{{ old('nafecha_nacimientome') }}">
                         </div>
 
@@ -73,14 +74,14 @@
                         <div class="col s6">
                             <label for="lugar_nacimiento">Lugar de Nacimiento</label>
 
-                            <input type="text" class="form-control" placeholder="lugar de nacimiento"
+                            <input type="text" class="form-control" 
                                 name="lugar_nacimiento" value="{{ old('lugar_nacimiento') }}">
                         </div>
 
                         <div class="col s6">
                             <label for="edad">Edad</label>
 
-                            <input type="text" class="form-control" placeholder="edad" name="edad"
+                            <input type="text" class="form-control"" name="edad"
                                 value="{{ old('edad') }}">
                         </div>
 
@@ -91,14 +92,14 @@
                         <div class="col s6">
                             <label for="numero_telefono">Numero de Telefono</label>
 
-                            <input type="text" class="form-control" placeholder="numero de telefono"
+                            <input type="text" class="form-control" 
                                 name="numero_telefono" value="{{ old('numero_telefono') }}">
                         </div>
 
                         <div class="col s6">
                             <label for="direccion">Direccion</label>
 
-                            <input type="text" class="form-control" placeholder="direccion" name="direccion"
+                            <input type="text" class="form-control"  name="direccion"
                                 value="{{ old('direccion') }}">
                         </div>
 
@@ -109,15 +110,23 @@
                         <div class="col s6">
                             <label for="cargo">Cargo</label>
 
-                            <input type="text" class="form-control" placeholder="cargo" name="cargo"
+                            <input type="text" class="form-control"  name="cargo"
                                 value="{{ old('cargo') }}">
                         </div>
 
                         <div class="col s6">
                             <label for="seccion">Seccion</label>
-
-                            <input type="text" class="form-control" placeholder="seccion" name="seccion"
-                                value="{{ old('seccion') }}">
+                                <select class="form-control" name="seccion" >
+                                    <option value="T-shirt">T-shirt</option>
+                                    <option value="Corte">Corte</option>
+                                    <option value="Camisa">Camisa</option>
+                                    <option value="Pantalon">Pantalon</option>
+                                    <option value="Empaque">Empaque</option>
+                                    <option value="Gorras">Gorras</option>
+                                    <option value="Modulo">Modulo-1</option>
+                                    <option value="Almacen">Almacen</option>
+                                    <option value="Mantenimiento">Mantenimiento</option>
+                                  </select>
                         </div>
 
                     </div>
@@ -125,16 +134,16 @@
                     <div class="row">
 
                         <div class="col s6">
-                            <label for="alergias_medicamento">Alergias a Medicamento</label>
+                            <label for="alergias_medicamento">Alergias a Medicamentos</label>
 
-                            <input type="text" class="form-control" placeholder="alergias de medicamento"
+                            <input type="text" class="form-control"
                                 name="alergias_medicamento" value="{{ old('alergias_medicamento') }}">
                         </div>
 
                         <div class="col s6">
                             <label for="telefono_emergencia">Telefono de Emergencia</label>
 
-                            <input type="text" class="form-control" placeholder="telefono de emergencia"
+                            <input type="text" class="form-control" 
                                 name="telefono_emergencia" value="{{ old('telefono_emergencia') }}">
                         </div>
 
@@ -145,15 +154,16 @@
                         <div class="col s6">
                             <label for="enfermedad_laboral">Enfermedad Laboral</label>
 
-                            <input type="text" class="form-control" placeholder="enfermedad laboral"
+                            <input type="text" class="form-control" 
                                 name="enfermedad_laboral" value="{{ old('enfermedad_laboral') }}">
                         </div>
 
                         <div class="col s6">
-                            <label for="accidentes_trabajo">Accidentes de Trabajo</label>
-
-                            <input type="text" class="form-control" placeholder="accidentes de trabajo"
-                                name="accidentes_trabajo" value="{{ old('accidentes_trabajo') }}">
+                            <label for="covid">Covid</label>
+                                <select class="form-control" name="covid">
+                                    <option value="Si">Si</option>
+                                    <option value="No">No</option>
+                                </select>
                         </div>
 
                     </div>
@@ -163,17 +173,16 @@
                         <div class="col s6">
                             <label for="enfermedad_comun">Enfermedad Comun</label>
 
-                            <input type="text" class="form-control" placeholder="enfermedad comun"
+                            <input type="text" class="form-control" 
                                 name="enfermedad_comun" value="{{ old('enfermedad_comun') }}">
                         </div>
 
+                        
                         <div class="col s6">
-                            <label for="covid">covid</label>
+                            <label for="accidentes_trabajo">Accidentes Laboral</label>
 
-                            <input type="text" class="form-control" placeholder="covid" name="covid"
-                                value="{{ old('covid') }}">
+                            <textarea class="form-control" name="accidentes_trabajo" rows="1" value="{{ old('accidentes_trabajo') }}"></textarea>
                         </div>
-
                     </div>
                     <br>
 

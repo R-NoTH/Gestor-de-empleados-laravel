@@ -19,13 +19,19 @@ class EmployeeController extends Controller
         return view ('employee.index');
         // dd('dfhfghks');
     }
+    public function dataTableCovid()
+    {
+        $Covid = Employee::where('covid','Si')->get();
+        dd($Covid);
+        return DataTables::of($Covid)->toJson();
+    }
     public function dataTable()
     {
         return DataTables::of(Employee::query())
         ->addColumn('action', function(Employee $employee){
             $actionBtn = '<a class="btn btn-secondary btn-sm" href="' . route('employees.edit', $employee->id) .'"><i
             class="far fa-edit"></i></a>';
-            $actionBtn .= '&nbsp;<button type="button" id="'.$employee->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i></button>';
+            $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $employee->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteItem">Delete</a>';
             return $actionBtn;
         })
         ->rawColumns(['action'])
@@ -127,8 +133,10 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        dd($id); 
-        Employee::destroy($id);
-        return redirect()->action('EmployeeController@index');
+        // dd($id); 
+        $data = Employee::findOrFail($id);
+        $data->delete();
+        // Employee::destroy($id);
+        // return redirect()->action('EmployeeController@index');
     }
 }

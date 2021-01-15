@@ -17,21 +17,19 @@
 
 </div>
 <br>
-<div id="confirmModal" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+<div id="confirmModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">hola como estas</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title">Confirmation</h2>
             </div>
             <div class="modal-body">
-                <p>Estas seguro de eliminar este usuario ?</p>
+                <h4 align="center" style="margin:0;">Are you sure you want to remove this data?</h4>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="confirm"name="confirm">Eliminar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
@@ -53,6 +51,7 @@
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(function() {
+            let gg = 1;
             $('#employesDatatable').DataTable({
                 processing: true,
                 serverSide: true,
@@ -80,32 +79,23 @@
                     }
                 ]
             });
-            var employee_id;
-            $(document).on('click', '.delete', function() {
-                employee_id = $(this).attr('id');
-                $('#confirmModal').modal('show')
+            $(document).on('click', '.deleteItem', function () {
+            var id = $(this).data("id");
+            confirm("Are You sure want to delete !");
+            $.ajax({
+                type: "post",
+                url: "{{ url('employees') }}/"+id,
+                success: function (data) {
+                    $('#employesDatatable').DataTable().ajax.reload();
+                    console.log('fine');
+
+                },
+                error: function (data) {
+                    // $('#employesDatatable').DataTable().ajax().reload();
+                    console.log('error');
+                }
             });
-            $('#confirm').click(function () {
-                
-                $.ajax({
-                    url:"/employees/destroy/"+employee_id,
-                    beforeSend:function(){
-                        $('#confirmModal').text('Delete');
-                        // alert(employee_id);
-                        // alert('Data Deleted');
-                        
-                   },
-                   succes:function(data)
-                   {
-                       setTimeout(function(){
-                           $('#confirmModal').modal('hide');
-                        //    $('.modal-backdrop').remove();
-                           $('#employesDatatable').DataTable().ajax.reload();
-                           alert('Data Deleted');
-                       },2000);
-                   }
-               }) 
-            });
+        });
         });
 
     </script>
