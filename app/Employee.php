@@ -19,7 +19,7 @@ class Employee extends Model
         'numero_telefono',
         'direccion',
         'cargo',
-        'seccion',
+        'seccion_id',
         'alergias_medicamento',
         'telefono_emergencia',
         'enfermedad_laboral',
@@ -27,4 +27,8 @@ class Employee extends Model
         'enfermedad_comun',
         'covid'
     ];
+    public function seccions(){
+        return $this->belongsTo(Seccion::class);
+        
+    }
 }

@@ -26,7 +26,9 @@ class CreateEmployeesTable extends Migration
             $table->string('numero_telefono')->nullable();
             $table->string('direccion')->nullable();
             $table->string('cargo')->nullable();
-            $table->string('seccion')->nullable();
+            // $table->string('seccion')->nullable();
+            $table->unsignedBigInteger('seccion_id')->nullable();
+            $table->foreign('seccion_id')->references('id')->on('seccions')->onUpdate('cascade')->onDelete('cascade');
             $table->string('alergias_medicamento')->nullable();
             $table->string('telefono_emergencia')->nullable();
             $table->string('enfermedad_laboral')->nullable();

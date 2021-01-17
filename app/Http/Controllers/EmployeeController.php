@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Employee;
+use App\Seccion;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -15,7 +16,10 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        // $employees=Employee::all();
+
+        // $employees=Employee::fi();
+        // $employees->seccions->name;
+        // dd($employees);
         return view ('employee.index');
         // dd('dfhfghks');
     }
@@ -45,7 +49,9 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employee.create');
+        $seccions=Seccion::all();
+        // dd($seccion);
+        return view('employee.create',compact('seccions'));
     }
 
     /**
@@ -64,8 +70,8 @@ class EmployeeController extends Controller
             'telefono_emergencia' => 'integer',
             'rh' => 'max:4',
         ]);
-
         $input = request()->except('_token');
+        // dd($input);
        
         Employee::create($input);
 
@@ -94,7 +100,9 @@ class EmployeeController extends Controller
     {
 
        $data = Employee::find($id);
-        return view('employee.edit',compact('data'));
+       $seccions=Seccion::all(); 
+    //    dd();
+        return view('employee.edit',compact('data','seccions'));
     }
 
     /**
