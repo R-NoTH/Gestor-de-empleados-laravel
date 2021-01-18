@@ -111,6 +111,7 @@
                         <div class="col s6">
                             <label for="seccion_id">Seccion</label>
                             <select class="form-control" name="seccion_id">
+                                <option selected value="">Escoje un Categoria</option>
                                 @foreach ($seccions as $seccion)
                                     <option name="seccion_id" id="seccion_id" value="{{ $seccion->id }}">{{ $seccion->name }}</option>
                                 @endforeach
@@ -149,6 +150,7 @@
                         <div class="col s6">
                             <label for="covid">Covid</label>
                             <select class="form-control" name="covid">
+                                <option selected value="">Escoje un Categoria</option>
                                 <option value="Si">Si</option>
                                 <option value="No">No</option>
                             </select>

@@ -4,37 +4,14 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
 
 <link src="{{ asset('css/fontello.css') }}">
-<style>
-    .social-link {
-            color: #f8b175;";
-            background: #ff3f3f;
-            display: block;
-            transition: all 0.3s;
-        }
-
-        .social-link:hover,
-        .social-link:focus {
-            color: white;
-            text-decoration: none;
-        }
-
-
-        .social-twitter {
-            background: #355c7d;
-        }
-
-        .social-twitter:hover,
-        .social-twitter:focus {
-            background: #5a8688;
-        }
-</style>
 <br>
 
 <div class='container'>
     <div>
         <h3>Tabla : Empleados</h3>
-        <div class="">
-            <a href="{{ route('employees.create') }}" class="social-link rounded py-2 px-4 my-2 social-twitter"><i class="fas fa-user-plus"></i> Agregar un registro</a>
+        <div class="col-3">
+            <a href="{{ route('employees.create') }}" class="btn btn-info"><i class="fas fa-user-plus"></i> Agregar un
+                nuevo Registro</a>
         </div>
     </div>
 
@@ -59,7 +36,7 @@
 </div>
 <div class="container">
 
-    <table id="employesDatatable" class="table table-striped table-bordered">
+    <table id="CovidDatatable" class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">id</th>
@@ -74,11 +51,10 @@
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(function() {
-            let gg = 1;
-            $('#employesDatatable').DataTable({
+            $('#CovidDatatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!!  route('employeesDataTable') !!}',
+                ajax: '{!!  route('employeesDataTableCovid') !!}',
                 columns: [{
                         data: 'id',
                         name: 'id'

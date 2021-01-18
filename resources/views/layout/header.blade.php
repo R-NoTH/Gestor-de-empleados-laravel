@@ -1,36 +1,36 @@
 @include('layout.head')
 <body>
     
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #227ddd;">
-        <a class="navbar-brand" href="{{ url('/') }}">
-            <i class="fas fa-home"></i>
-            Bootstrap
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #355C7D;">
+        <a class="navbar-brand" style="color: #f8b175;" href="{{ url('/') }}">
+            <i class="fas fa-medkit"></i>
+            Facon-Sst
         </a>
         {{-- <a class="navbar-brand" href="{{ route('employees.index') }}"> Sst </a> --}}
         
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-    </button>
+        </button>
     
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{{ url('/') }}">Home</a>
+                <a class="nav-link"style="color: #f8b175;" href="{{ url('/') }}">Inicio</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
+            </li> --}}
+            {{-- <li class="nav-item">
                 <a class="nav-link disabled" href="#">Disabled</a>
-            </li>
+            </li> --}}
         </ul>
         <ul class="navbar-nav ">
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-bell">
+                <a class="nav-link"style="color: #f8b175;" href="#">
+                    {{-- <i class="fa fa-bell">
                         <span class="badge badge-info">11</span>
-                    </i>
+                    </i> --}}
                     Sign out
                 </a>
             </li>

@@ -16,18 +16,28 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-
-        // $employees=Employee::fi();
-        // $employees->seccions->name;
-        // dd($employees);
         return view ('employee.index');
-        // dd('dfhfghks');
+      
+    }
+    public function indexCovid()
+    {
+        return view ('employee.indexCovid');
+      
     }
     public function dataTableCovid()
     {
-        $Covid = Employee::where('covid','Si')->get();
-        dd($Covid);
-        return DataTables::of($Covid)->toJson();
+
+        $Covid = Employee::where('covid','Si');
+        // dd($Covid);
+        return DataTables::of($Covid)
+        ->addColumn('action', function(Employee $employee){
+            $actionBtn = '<a class="btn btn-secondary btn-sm" href="' . route('employees.edit', $employee->id) .'"><i
+            class="far fa-edit"></i></a>';
+            $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $employee->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteItem">Delete</a>';
+            return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->toJson();
     }
     public function dataTable()
     {
