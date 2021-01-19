@@ -37,20 +37,35 @@
 
 <div class='container'>
     <div>
-        <h3> Funcionarios <i>({{ $count }})</i> </h3>
-
-        <div>
-            <a href="{{ route('employees.create') }}" class="social-link rounded py-2 px-4 my-2 social-twitter"><i
-                    class="fas fa-user-plus"></i> Agregar un registro</a>
-        </div>
+        <h3>Tabla : Empleados</h3>
+            <a href="{{ route('employees.create') }}" class="social-link rounded py-2 px-4 my-2 social-twitter"><i class="fas fa-user-plus"></i> Agregar un
+                nuevo Registro</a>
+       
     </div>
 
 </div>
 <br>
+<div id="confirmModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title">Confirmation</h2>
+            </div>
+            <div class="modal-body">
+                <h4 align="center" style="margin:0;">Are you sure you want to remove this data?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
 
-    <table id="employesDatatable" class="table table-dark" style="color: #ffffff">
-        <thead class="" style="background-color:#4a3899;">
+    <table id="EnfermedadComunDatatable" class="table table-dark">
+        <thead style="background-color:#4a3899;">
             <tr>
                 <th scope="col">id</th>
                 <th scope="col">Documento</th>
@@ -60,33 +75,14 @@
             </tr>
         </thead>
     </table>
-    <div class="modal" id="miModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(function() {
-            let gg = 1;
-            $('#employesDatatable').DataTable({
+            $('#EnfermedadComunDatatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!!  route('employeesDataTable') !!}',
+                ajax: '{!!  route('employeesDataTableEnfermedadComun') !!}',
                 columns: [{
                         data: 'id',
                         name: 'id'
@@ -110,11 +106,23 @@
                     }
                 ]
             });
+            $(document).on('click', '.deleteItem', function () {
+            var id = $(this).data("id");
+            confirm("Are You sure want to delete !");
+            $.ajax({
+                type: "post",
+                url: "{{ url('employees') }}/"+id,
+                success: function (data) {
+                    $('#employesDatatable').DataTable().ajax.reload();
+                    console.log('fine');
+
+                },
+                error: function (data) {
+                    // $('#employesDatatable').DataTable().ajax().reload();
+                    console.log('error');
+                }
+            });
         });
-        $(".show-btn").on("click", function() {
-
-            $(".modal").modal("show");
-
         });
 
     </script>

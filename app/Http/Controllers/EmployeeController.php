@@ -14,44 +14,102 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view ('employee.index');
-      
-    }
+    
+    // Covid
     public function indexCovid()
     {
-        return view ('employee.indexCovid');
-      
+        $Covid = Employee::where('covid','Si')->get();
+        $count = 0;
+        for ($i=0; $i <count($Covid); $i++) { 
+            $count++;
+        }
+        return view ('employee.indexCovid',compact('count'));
     }
     public function dataTableCovid()
     {
-
         $Covid = Employee::where('covid','Si');
-        // dd($Covid);
         return DataTables::of($Covid)
         ->addColumn('action', function(Employee $employee){
-            $actionBtn = '<a class="btn btn-secondary btn-sm" href="' . route('employees.edit', $employee->id) .'"><i
+            $actionBtn = '<a class="btn  btn-sm" style="background-color:#519D9E;" href="' . route('employees.edit', $employee->id) .'"><i
             class="far fa-edit"></i></a>';
-            $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $employee->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteItem">Delete</a>';
+            $actionBtn .= '&nbsp;<a class="btn btn-sm show-btn" style="background-color:#519D9E;" href="' . route('employees.show', $employee->id) .'"><i class="far fa-eye"></i></a>';
+            $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $employee->id . '"style="background-color:#519D9E;" data-original-title="Delete" class="btn btn-sm deleteItem"><i class="fas fa-trash-alt"></i></a>';
             return $actionBtn;
         })
         ->rawColumns(['action'])
         ->toJson();
     }
+    // Enfermedad Comun
+    public function indexEnfermedadComun()
+    {
+        return view ('employee.indexEnfermedadComun');
+    }
+    public function dataTableEnfermedadComun()
+    {
+        $enfermedadComun = Employee::where('enfermedad_comun', '!=',null);
+        return DataTables::of($enfermedadComun)
+        ->addColumn('action', function(Employee $employee){
+            $actionBtn = '<a class="btn  btn-sm" style="background-color:#519D9E;" href="' . route('employees.edit', $employee->id) .'"><i
+            class="far fa-edit"></i></a>';
+            $actionBtn .= '&nbsp;<a class="btn btn-sm show-btn" style="background-color:#519D9E;" href="' . route('employees.show', $employee->id) .'"><i class="far fa-eye"></i></a>';
+            $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $employee->id . '"style="background-color:#519D9E;" data-original-title="Delete" class="btn btn-sm deleteItem"><i class="fas fa-trash-alt"></i></a>';
+            return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->toJson();
+    }
+    // Accidente Laboral
+    public function indexAccidenteLaboral()
+    {
+        $accidenteLaboral = Employee::where('accidentes_trabajo','!=',null)->get();
+        $count = 0;
+        for ($i=0; $i <count($accidenteLaboral); $i++) { 
+            $count++;
+        }
+        // dd($count);
+        return view ('employee.indexAccidenteLaboral',compact('count'));
+    }
+    public function dataTableAccidenteLaboral()
+    {
+        $accidenteLaboral = Employee::where('accidentes_trabajo', '!=',null);
+        return DataTables::of($accidenteLaboral)
+        ->addColumn('action', function(Employee $employee){
+            $actionBtn = '<a class="btn  btn-sm" style="background-color:#519D9E;" href="' . route('employees.edit', $employee->id) .'"><i
+            class="far fa-edit"></i></a>';
+            $actionBtn .= '&nbsp;<a class="btn btn-sm show-btn" style="background-color:#519D9E;" href="' . route('employees.show', $employee->id) .'"><i class="far fa-eye"></i></a>';
+            $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $employee->id . '"style="background-color:#519D9E;" data-original-title="Delete" class="btn btn-sm deleteItem"><i class="fas fa-trash-alt"></i></a>';
+            return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->toJson();
+    }
+    // Datatable
     public function dataTable()
     {
         return DataTables::of(Employee::query())
         ->addColumn('action', function(Employee $employee){
-            $actionBtn = '<a class="btn btn-secondary btn-sm" href="' . route('employees.edit', $employee->id) .'"><i
+            $actionBtn = '<a class="btn  btn-sm" style="background-color:#519D9E;" href="' . route('employees.edit', $employee->id) .'"><i
             class="far fa-edit"></i></a>';
-            $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $employee->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteItem">Delete</a>';
+            $actionBtn .= '&nbsp;<a class="btn btn-sm show-btn" style="background-color:#519D9E;" href="' . route('employees.show', $employee->id) .'"><i class="far fa-eye"></i></a>';
+            $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $employee->id . '"style="background-color:#519D9E;" data-original-title="Delete" class="btn btn-sm deleteItem"><i class="fas fa-trash-alt"></i></a>';
             return $actionBtn;
         })
         ->rawColumns(['action'])
         ->toJson();
     }
-
+    public function index()
+    {
+        $employee= Employee::all();
+        $count = 0;
+        for ($i=0; $i <count($employee) ; $i++) { 
+            # code...
+            $count++;
+        }
+        // dd($count);
+        return view ('employee.index',compact('count'));
+        
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -74,6 +132,11 @@ class EmployeeController extends Controller
     {
         // dd($request);
         $this->validate($request, [
+            'name'=> 'required',
+            'sexo'=> 'required',
+            'rh'=> 'required',
+            'fecha_nacimiento'=>'required',
+            'lugar_nacimiento'=> 'required',
             'documento' => 'integer',
             'edad' => 'integer',
             'numero_telefono' => 'integer',
@@ -97,6 +160,8 @@ class EmployeeController extends Controller
     public function show($id)
     {   
         $data = Employee::find($id);
+
+        // dd($data->seccion->name);
         return view('employee.show',compact('data'));
     }
 

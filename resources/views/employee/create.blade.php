@@ -1,12 +1,18 @@
 @include('layout.head')
 @include('layout.header')
+<style>
+    body{
+        background-color: #2a363b;
+    }
+</style>
 <div class="container">
     <br>
-    <h5 class="card-header">Registro de Empleados</h5>
     <div class="card">
         <div class="card-body">
             <form action="{{ action('EmployeeController@store') }}" method="post">
                 {{ csrf_field() }}
+                <h5 class="card-title text-center" style="font-size: 1.7625rem;line-height: 1.4em;color:#233e55" >Registro de Funcionarios</h5>
+                <br>
 
                 <div class="container">
                     @if ($errors->any())
@@ -22,13 +28,12 @@
 
                         <div class="col s6">
                             <label for="foto">Foto</label>
-                            <input type="text" class="form-control" name="foto" value="{{ old('foto') }}">
+                            <input type="file" class="form-control" name="foto" value="{{ old('foto') }}">
                         </div>
                         <div class="col s6">
                             <label for="name">Nombre Completo</label>
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="name" value="{{ old('name') }}">
                         </div>
-
                     </div>
                     <br>
                     <div class="row">
@@ -36,12 +41,13 @@
                         <div class="col s6">
                             <label for="documento">Documento</label>
 
-                            <input type="text" class="form-control" name="documento" value="{{ old('documento') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="documento" value="{{ old('documento') }}">
                         </div>
 
                         <div class="col s6">
                             <label for="sexo">Sexo</label>
-                            <select class="form-control" name="sexo">
+                            <select  class="form-control" name="sexo">
+                                <option selected value="">Escoje un Categoria</option>
                                 <option value="Mujer">Mujer</option>
                                 <option value="Hombre">Hombre</option>
                             </select>
@@ -54,13 +60,13 @@
                         <div class="col s6">
                             <label for="rh">Rh</label>
 
-                            <input type="text" class="form-control" name="rh" value="{{ old('rh') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="rh" value="{{ old('rh') }}">
                         </div>
 
                         <div class="col s6">
                             <label for="fecha_nacimiento">Fecha de Nacimiento</label>
 
-                            <input type="date" class="form-control" name="fecha_nacimiento"
+                            <input type="date" style="border-radius: 10px;" class="form-control" name="fecha_nacimiento"
                                 value="{{ old('nafecha_nacimientome') }}">
                         </div>
 
@@ -71,14 +77,14 @@
                         <div class="col s6">
                             <label for="lugar_nacimiento">Lugar de Nacimiento</label>
 
-                            <input type="text" class="form-control" name="lugar_nacimiento"
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="lugar_nacimiento"
                                 value="{{ old('lugar_nacimiento') }}">
                         </div>
 
                         <div class="col s6">
                             <label for="edad">Edad</label>
 
-                            <input type="text" class="form-control"" name=" edad" value="{{ old('edad') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control"" name=" edad" value="{{ old('edad') }}">
                         </div>
 
                     </div>
@@ -88,14 +94,14 @@
                         <div class="col s6">
                             <label for="numero_telefono">Numero de Telefono</label>
 
-                            <input type="text" class="form-control" name="numero_telefono"
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="numero_telefono"
                                 value="{{ old('numero_telefono') }}">
                         </div>
 
                         <div class="col s6">
                             <label for="direccion">Direccion</label>
 
-                            <input type="text" class="form-control" name="direccion" value="{{ old('direccion') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="direccion" value="{{ old('direccion') }}">
                         </div>
 
                     </div>
@@ -105,7 +111,7 @@
                         <div class="col s6">
                             <label for="cargo">Cargo</label>
 
-                            <input type="text" class="form-control" name="cargo" value="{{ old('cargo') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="cargo" value="{{ old('cargo') }}">
                         </div>
 
                         <div class="col s6">
@@ -125,14 +131,14 @@
                         <div class="col s6">
                             <label for="alergias_medicamento">Alergias a Medicamentos</label>
 
-                            <input type="text" class="form-control" name="alergias_medicamento"
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="alergias_medicamento"
                                 value="{{ old('alergias_medicamento') }}">
                         </div>
 
                         <div class="col s6">
                             <label for="telefono_emergencia">Telefono de Emergencia</label>
 
-                            <input type="text" class="form-control" name="telefono_emergencia"
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="telefono_emergencia"
                                 value="{{ old('telefono_emergencia') }}">
                         </div>
 
@@ -143,7 +149,7 @@
                         <div class="col s6">
                             <label for="enfermedad_laboral">Enfermedad Laboral</label>
 
-                            <input type="text" class="form-control" name="enfermedad_laboral"
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="enfermedad_laboral"
                                 value="{{ old('enfermedad_laboral') }}">
                         </div>
 
@@ -163,7 +169,7 @@
                         <div class="col s6">
                             <label for="enfermedad_comun">Enfermedad Comun</label>
 
-                            <input type="text" class="form-control" name="enfermedad_comun"
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="enfermedad_comun"
                                 value="{{ old('enfermedad_comun') }}">
                         </div>
 
@@ -171,12 +177,47 @@
                         <div class="col s6">
                             <label for="accidentes_trabajo">Accidentes Laboral</label>
 
-                            <textarea class="form-control" name="accidentes_trabajo" rows="1"
+                            <textarea style="border-radius: 10px;" class="form-control" name="accidentes_trabajo" rows="1"
                                 value="{{ old('accidentes_trabajo') }}"></textarea>
                         </div>
                     </div>
                     <br>
+                    <div class="row">
 
+                        <div class="col s6">
+                            <label for="enfermedad_comun">Patologia Especial</label>
+
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="enfermedad_comun"
+                                value="{{ old('enfermedad_comun') }}">
+                        </div>
+
+
+                        <div class="col s6">
+                            <label for="accidentes_trabajo">Enfermedad laboral ARL</label>
+
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="enfermedad_laboral_ARL"
+                                value="{{ old('enfermedad_laboral_ARL') }}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+
+                        <div class="col s6">
+                            <label for="enfermedad_comun">Gestantes (Fecha de posible parto)</label>
+
+                            <input type="date" style="border-radius: 10px;" class="form-control" name="enfermedad_comun"
+                                value="{{ old('enfermedad_comun') }}">
+                        </div>
+
+
+                        <div class="col s6">
+                            <label for="accidentes_trabajo">Lactantes</label>
+
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="enfermedad_laboral_ARL"
+                                value="{{ old('enfermedad_laboral_ARL') }}">
+                        </div>
+                    </div>
+                    <br>
                     <button type="submit" class="btn btn-dark">Enviar</button>
                 </div>
         </div>

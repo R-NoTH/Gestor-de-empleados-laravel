@@ -27,7 +27,7 @@ class Employee extends Model
         'enfermedad_comun',
         'covid'
     ];
-    public function seccions(){
+    public function seccion(){
         return $this->belongsTo(Seccion::class);
         
     }

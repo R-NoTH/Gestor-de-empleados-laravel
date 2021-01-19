@@ -16,8 +16,8 @@
     <style>
         html,
         body {
-            background-color: #fff;
-            color: #636b6f;
+            background-color:#2a363b;
+            color: #ffffff;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
             height: 100vh;
@@ -53,13 +53,12 @@
         }
 
         .links>a {
-            color: #f8b175;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
+            color: #ffffff;
+            /* padding: 100px; */
+            font-size: 15px;
+            font-weight: 400;
             letter-spacing: .1rem;
             text-decoration: none;
-            text-transform: uppercase;
         }
 
         .m-b-md {
@@ -82,12 +81,12 @@
 
 
         .social-twitter {
-            background: #355c7d;
+            background: #C06C84;
         }
 
         .social-twitter:hover,
         .social-twitter:focus {
-            background: #5a8688;
+            background:#5643ac;
         }
 
     </style>
@@ -113,28 +112,31 @@
             <div class="container">
 
                 <div class="title m-b-md">
-                    Facon-Sst
+                    FACON-SST
                 </div>
 
-                <div class="links btn-group-vertical">
-                    <a class="social-link rounded py-2 px-4 my-2 social-twitter"
-                        href="{{ route('employees.index') }}">Table</a>
-                    <a class="social-link rounded py-2 px-4 my-2 social-twitter"
-                        href="{{ route('employees.index') }}">Enfermedad comun</a>
-                    <a class="social-link rounded py-2 px-4 my-2 social-twitter"
-                        href="{{ route('employees.index') }}">Patologia Especiales</a>
-                    <a class="social-link rounded py-2 px-4 my-2 social-twitter"
-                        href="{{ route('employeesIndexCovid') }}">Covid</a>
-                    <a class="social-link rounded py-2 px-4 my-2 social-twitter"
-                        href="{{ route('employees.index') }}">Accidentes Laboral</a>
-                    <a class="social-link rounded py-2 px-4 my-2 social-twitter"
-                        href="{{ route('employees.index') }}">Enfermedad laboral ARL</a>
-                    <a class="social-link rounded py-2 px-4 my-2 social-twitter"
-                        href="{{ url('panelControl') }}">Panel Control</a>
+                <div class="links btn-group-vertical ">
+                    <div class="container links btn-group-vertical" >
 
-
-
-
+                        <a class="social-link rounded py-2 px-4 my-2 social-twitter"
+                        href="{{ route('employees.index') }}">General</a>
+                    <a class="social-link rounded py-2 px-4 my-2 social-twitter"
+                    href="{{ route('employeesIndexCovid') }}">Covid-19</a>
+                    <a class="social-link rounded py-2 px-4 my-2 social-twitter"
+                    href="{{ route('employeesIndexAccidentesLaboral') }}">Accidentes Laboral</a>
+                    <a class="social-link rounded py-2 px-4 my-2 social-twitter"
+                    href="{{ route('employeesIndexEnfermedadComun') }}">Enfermedad comun</a>
+                    <a class="social-link rounded py-2 px-4 my-2 social-twitter"
+                    href="{{ route('employees.index') }}">Patologia Especiales</a>
+                    <a class="social-link rounded py-2 px-4 my-2 social-twitter"
+                    href="{{ route('employees.index') }}">Enfermedad laboral ARL</a>
+                    <a class="social-link rounded py-2 px-4 my-2 social-twitter"
+                    href="#">Gestantes / Lactantes</a>
+                    
+                    
+                    
+                    
+                </div>
                 </div>
             </div>
         </div>

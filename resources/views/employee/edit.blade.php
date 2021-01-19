@@ -1,10 +1,15 @@
 @include('layout.head')
 @include('layout.header')
+<style>
+    body{
+        background-color: #2a363b;
+    }
+    </style>
 <div class="container">
 
     <br>
     <div class="card">
-        <h5 class="card-header">Edit del Empleado</h5>
+        <h5 class="card-title text-center" style="font-size: 1.7625rem;line-height: 1.4em;color:#233e55">Edit del Funcionarios</h5>
         <div class="card-body">
             <form action="{{ action('EmployeeController@update', $data->id) }}" method="post">
                 {{ csrf_field() }}
