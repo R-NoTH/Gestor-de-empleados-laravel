@@ -7,15 +7,23 @@ use App\Seccion;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class EmployeeController extends Controller
+class HomeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Create a new controller instance.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    
-    // Covid
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function indexCovid()
     {
         $Covid = Employee::where('covid','Si')->get();
@@ -42,12 +50,7 @@ class EmployeeController extends Controller
     // Enfermedad Comun
     public function indexEnfermedadComun()
     {
-        $EnfermedadComun = Employee::where('enfermedad_comun','!=',null)->get();
-        $count = 0;
-        for ($i=0; $i <count($EnfermedadComun); $i++) { 
-            $count++;
-        }
-        return view ('employee.indexEnfermedadComun',compact('count'));
+        return view ('employee.indexEnfermedadComun');
     }
     public function dataTableEnfermedadComun()
     {
@@ -78,52 +81,6 @@ class EmployeeController extends Controller
     {
         $accidenteLaboral = Employee::where('accidentes_trabajo', '!=',null);
         return DataTables::of($accidenteLaboral)
-        ->addColumn('action', function(Employee $employee){
-            $actionBtn = '<a class="btn  btn-sm" style="background-color:#519D9E;" href="' . route('employees.edit', $employee->id) .'"><i
-            class="far fa-edit"></i></a>';
-            $actionBtn .= '&nbsp;<a class="btn btn-sm show-btn" style="background-color:#519D9E;" href="' . route('employees.show', $employee->id) .'"><i class="far fa-eye"></i></a>';
-            $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $employee->id . '"style="background-color:#519D9E;" data-original-title="Delete" class="btn btn-sm deleteItem"><i class="fas fa-trash-alt"></i></a>';
-            return $actionBtn;
-        })
-        ->rawColumns(['action'])
-        ->toJson();
-    }
-    public function indexPatologiaEspecial()
-    {
-        $PatologiaEspecial = Employee::where('patologia_especial','!=',null)->get();
-        $count = 0;
-        for ($i=0; $i <count($PatologiaEspecial); $i++) { 
-            $count++;
-        }
-        return view ('employee.indexPatologiaEspecial',compact('count'));
-    }
-    public function dataTablePatologiaEspecial()
-    {
-        $patologiaespecial = Employee::where('patologia_especial', '!=',null);
-        return DataTables::of($patologiaespecial)
-        ->addColumn('action', function(Employee $employee){
-            $actionBtn = '<a class="btn  btn-sm" style="background-color:#519D9E;" href="' . route('employees.edit', $employee->id) .'"><i
-            class="far fa-edit"></i></a>';
-            $actionBtn .= '&nbsp;<a class="btn btn-sm show-btn" style="background-color:#519D9E;" href="' . route('employees.show', $employee->id) .'"><i class="far fa-eye"></i></a>';
-            $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $employee->id . '"style="background-color:#519D9E;" data-original-title="Delete" class="btn btn-sm deleteItem"><i class="fas fa-trash-alt"></i></a>';
-            return $actionBtn;
-        })
-        ->rawColumns(['action'])
-        ->toJson();
-    }
-    public function indexEnfermedadlaboralArl()
-    {
-        $Enfermedadlaboralarl = Employee::where('enfermedad_laboral_arl','!=',null)->get();
-        $count = 0;
-        for ($i=0; $i <count($Enfermedadlaboralarl); $i++) { 
-            $count++;
-        }
-        return view ('employee.indexEnfermedadlaboralArl',compact('count'));
-    }
-    public function dataTableEnfermedadlaboralArl()
-    {
-        $Enfermedadlaboralarl = Employee::where('enfermedad_laboral_arl', '!=',null);
-        return DataTables::of($Enfermedadlaboralarl)
         ->addColumn('action', function(Employee $employee){
             $actionBtn = '<a class="btn  btn-sm" style="background-color:#519D9E;" href="' . route('employees.edit', $employee->id) .'"><i
             class="far fa-edit"></i></a>';

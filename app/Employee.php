@@ -20,12 +20,16 @@ class Employee extends Model
         'direccion',
         'cargo',
         'seccion_id',
+        'covid',
         'alergias_medicamento',
         'telefono_emergencia',
         'enfermedad_laboral',
         'accidentes_trabajo',
         'enfermedad_comun',
-        'covid'
+        'patologia_especial',
+        'enfermedad_laboral_arl',
+        'gestantes',
+        'lactantes',
     ];
     public function seccion(){
         return $this->belongsTo(Seccion::class);

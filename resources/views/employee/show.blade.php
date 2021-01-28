@@ -125,6 +125,26 @@
               <th>Accidentes Laboral</th>
               <td>{{ $data->accidentes_trabajo}}</td> 
             </tr>
+            <tr>
+              
+              <th>Patologia Especial</th>
+              <td>{{ $data->patologia_especial}}</td> 
+            </tr>
+            <tr>
+              
+              <th>Enfermedad Laboral Arl</th>
+              <td>{{ $data->enfermedad_laboral_arl}}</td> 
+            </tr>
+            <tr>
+              
+              <th>Gestantes</th>
+              <td>{{ $data->gestantes}}</td> 
+            </tr>
+            <tr>
+              
+              <th>Lactantes</th>
+              <td>{{ $data->lactantes}}</td> 
+            </tr>
             
 
 

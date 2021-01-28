@@ -5,10 +5,12 @@
 
 <link src="{{ asset('css/fontello.css') }}">
 <style>
+    
     body{
         background-color: #2a363b;
         color: #ffffff;
     }
+
     .social-link {
         color: #ffffff;
         background: #ff3f3f;
@@ -31,16 +33,15 @@
     .social-twitter:focus {
         background: #C06C84;
     }
-
 </style>
 <br>
 
 <div class='container'>
     <div>
-        <h3>Tabla : Enfermedad Comun {{ $count }}</h3>
-            <a href="{{ route('employees.create') }}" class="social-link rounded py-2 px-4 my-2 social-twitter"><i class="fas fa-user-plus"></i> Agregar un
-                nuevo Registro</a>
-       
+        <h3>Enfermedad laboral Arl ({{ $count }})</h3>
+        <div class="">
+            <a href="{{ route('employees.create') }}" class="social-link rounded py-2 px-4 my-2 social-twitter"><i class="fas fa-user-plus"></i> Agregar un registro</a>
+        </div>
     </div>
 
 </div>
@@ -64,8 +65,8 @@
 </div>
 <div class="container">
 
-    <table id="EnfermedadComunDatatable" class="table table-dark">
-        <thead style="background-color:#4a3899;">
+    <table id="AccidenteLaboralDatatable" class="table table-dark">
+        <thead class="" style="background-color:#4a3899;">
             <tr>
                 <th scope="col">id</th>
                 <th scope="col">Documento</th>
@@ -79,10 +80,10 @@
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <script>
         $(function() {
-            $('#EnfermedadComunDatatable').DataTable({
+            $('#AccidenteLaboralDatatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!!  route('employeesDataTableEnfermedadComun') !!}',
+                ajax: '{!!  route('employeesDataTableEnfermedadlaboralArl') !!}',
                 columns: [{
                         data: 'id',
                         name: 'id'
@@ -106,23 +107,6 @@
                     }
                 ]
             });
-            $(document).on('click', '.deleteItem', function () {
-            var id = $(this).data("id");
-            confirm("Are You sure want to delete !");
-            $.ajax({
-                type: "post",
-                url: "{{ url('employees') }}/"+id,
-                success: function (data) {
-                    $('#employesDatatable').DataTable().ajax.reload();
-                    console.log('fine');
-
-                },
-                error: function (data) {
-                    // $('#employesDatatable').DataTable().ajax().reload();
-                    console.log('error');
-                }
-            });
-        });
         });
 
     </script>

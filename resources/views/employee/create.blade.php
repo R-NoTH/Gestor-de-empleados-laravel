@@ -185,36 +185,36 @@
                     <div class="row">
 
                         <div class="col s6">
-                            <label for="enfermedad_comun">Patologia Especial</label>
+                            <label for="patologia_especial">Patologia Especial</label>
 
-                            <input type="text" style="border-radius: 10px;" class="form-control" name="enfermedad_comun"
-                                value="{{ old('enfermedad_comun') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="patologia_especial"
+                                value="{{ old('patologia_especial') }}">
                         </div>
 
 
                         <div class="col s6">
-                            <label for="accidentes_trabajo">Enfermedad laboral ARL</label>
+                            <label for="enfermedad_laboral_arl">Enfermedad laboral ARL</label>
 
-                            <input type="text" style="border-radius: 10px;" class="form-control" name="enfermedad_laboral_ARL"
-                                value="{{ old('enfermedad_laboral_ARL') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="enfermedad_laboral_arl"
+                                value="{{ old('enfermedad_laboral_arl') }}">
                         </div>
                     </div>
                     <br>
                     <div class="row">
 
                         <div class="col s6">
-                            <label for="enfermedad_comun">Gestantes (Fecha de posible parto)</label>
+                            <label for="gestantes">Gestantes (Fecha de posible parto)</label>
 
-                            <input type="date" style="border-radius: 10px;" class="form-control" name="enfermedad_comun"
-                                value="{{ old('enfermedad_comun') }}">
+                            <input type="date" style="border-radius: 10px;" class="form-control" name="gestantes"
+                                value="{{ old('gestantes') }}">
                         </div>
 
 
                         <div class="col s6">
-                            <label for="accidentes_trabajo">Lactantes</label>
+                            <label for="lactantes">Lactantes</label>
 
-                            <input type="text" style="border-radius: 10px;" class="form-control" name="enfermedad_laboral_ARL"
-                                value="{{ old('enfermedad_laboral_ARL') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="lactantes"
+                                value="{{ old('lactantes') }}">
                         </div>
                     </div>
                     <br>

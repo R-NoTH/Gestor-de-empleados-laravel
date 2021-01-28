@@ -29,12 +29,16 @@ class CreateEmployeesTable extends Migration
             // $table->string('seccion')->nullable();
             $table->unsignedBigInteger('seccion_id')->nullable();
             $table->foreign('seccion_id')->references('id')->on('seccions')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('covid')->nullable();
             $table->string('alergias_medicamento')->nullable();
             $table->string('telefono_emergencia')->nullable();
             $table->string('enfermedad_laboral')->nullable();
             $table->string('accidentes_trabajo')->nullable();
             $table->string('enfermedad_comun')->nullable();
-            $table->string('covid')->nullable();
+            $table->string('patologia_especial')->nullable();
+            $table->string('enfermedad_laboral_arl')->nullable();
+            $table->date('gestantes')->nullable();
+            $table->string('lactantes')->nullable();
             $table->timestamps();
         });
     }

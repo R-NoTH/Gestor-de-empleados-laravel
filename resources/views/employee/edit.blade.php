@@ -218,7 +218,42 @@
 
                     </div>
                     <br>
+                    <div class="row">
 
+                        <div class="col s6">
+                            <label for="patologia_especial">Patologia Especial</label>
+
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="patologia_especial"
+                                value="{{$data->patologia_especial  }}">
+                        </div>
+
+
+                        <div class="col s6">
+                            <label for="enfermedad_laboral_arl">Enfermedad laboral ARL</label>
+
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="enfermedad_laboral_arl"
+                                value="{{$data->enfermedad_laboral_arl  }}">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+
+                        <div class="col s6">
+                            <label for="gestantes">Gestantes (Fecha de posible parto)</label>
+
+                            <input type="date" style="border-radius: 10px;" class="form-control" name="gestantes"
+                                value="{{$data->gestantes  }}">
+                        </div>
+
+
+                        <div class="col s6">
+                            <label for="lactantes">Lactantes</label>
+
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="lactantes"
+                                value="{{$data->lactantes }}">
+                        </div>
+                    </div>
+                    <br>
                     <button type="submit" class="btn btn-dark">Enviar</button>
                 </div>
                 {{-- <div class="row">
