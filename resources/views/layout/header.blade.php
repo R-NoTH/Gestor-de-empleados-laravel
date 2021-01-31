@@ -1,7 +1,7 @@
 @include('layout.head')
 <body>
     
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#5643ac;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#C06C84;">
         <a class="navbar-brand" style="color: #ffffff;" href="{{ url('/') }}">
             <i class="fas fa-medkit"></i>
             Facon-Sst

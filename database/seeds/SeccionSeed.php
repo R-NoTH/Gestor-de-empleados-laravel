@@ -44,8 +44,13 @@ class SeccionSeed extends Seeder
         DB::table('seccions')->insert([
             'name' => 'Almacen',
                    
-        ]);DB::table('seccions')->insert([
+        ]);
+        DB::table('seccions')->insert([
             'name' => 'Mantenimiento',
+                   
+        ]);
+        DB::table('seccions')->insert([
+            'name' => 'Administrativa',
                    
         ]);
     }

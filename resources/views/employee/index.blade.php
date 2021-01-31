@@ -24,12 +24,13 @@
 
 
     .social-twitter {
-        background:#50438d;
+        background:#C06C84;
     }
 
     .social-twitter:hover,
     .social-twitter:focus {
-        background: #C06C84;
+        background:#50438d;
+        
     }
 
 </style>
@@ -50,7 +51,7 @@
 <div class="container">
 
     <table id="employesDatatable" class="table table-dark" style="color: #ffffff">
-        <thead class="" style="background-color:#4a3899;">
+        <thead class="" style="background-color:#C06C84;">
             <tr>
                 <th scope="col">id</th>
                 <th scope="col">Documento</th>

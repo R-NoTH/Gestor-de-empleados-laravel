@@ -49,7 +49,7 @@
         }
 
         .title {
-            font-size: 84px;
+            font-size: 94px;
         }
 
         .links>a {
@@ -98,7 +98,7 @@
             <div class="container">
 
                 <div class="title m-b-md">
-                    FACON-SST
+                  <b>FACON-SST </b>  
                 </div>
 
                 <div class="links btn-group-vertical ">
