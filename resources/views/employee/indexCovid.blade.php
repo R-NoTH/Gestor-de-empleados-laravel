@@ -124,5 +124,31 @@
             });
         });
         });
+        function deleteFunc(id) {
+                var token = '{{ csrf_token() }}';
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': token,
+                        'X-Requested-With': 'XMLHttpRequest',
+                    }
+                });
+                if (confirm("Delete Record?") == true) {
+                    var id = id;
+                    alert(id);
+                    // ajax
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url('delete-employee') }}",
+                        data: {
+                            id: id
+                        },
+                        dataType: 'json',
+                        success: function(res) {
+                            var oTable = $('#employesDatatable').dataTable();
+                            oTable.fnDraw(false);
+                        }
+                    });
+                }
+            }
 
     </script>
