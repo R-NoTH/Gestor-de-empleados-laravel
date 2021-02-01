@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'admin'], function () {
     
     Route::resource('employees', 'EmployeeController');
+
+    // Route::delete('/admin/usertable/deleteuser', 'EmployeeController@destroy')->name('admin.deleteuser');
+    Route::post('delete-company', [EmployeeController::class, 'destroy']);
     Route::get('employeesDataTable', 'EmployeeController@dataTable')->name('employeesDataTable');
     Route::get('employeesDataTableCovid', 'EmployeeController@dataTableCovid')->name('employeesDataTableCovid');
     Route::get('employeesIndexCovid', 'EmployeeController@indexCovid')->name('employeesIndexCovid');

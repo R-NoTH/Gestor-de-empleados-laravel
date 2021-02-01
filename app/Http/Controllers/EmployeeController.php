@@ -142,7 +142,11 @@ class EmployeeController extends Controller
             $actionBtn = '<a class="btn  btn-sm" style="background-color:#519D9E;" href="' . route('employees.edit', $employee->id) .'"><i
             class="far fa-edit"></i></a>';
             $actionBtn .= '&nbsp;<a class="btn btn-sm show-btn" style="background-color:#519D9E;" href="' . route('employees.show', $employee->id) .'"><i class="far fa-eye"></i></a>';
-            $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $employee->id . '"style="background-color:#519D9E;" data-original-title="Delete" class="btn btn-sm deleteItem"><i class="fas fa-trash-alt"></i></a>';
+            // $actionBtn .= '&nbsp; <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $employee->id . '"style="background-color:#519D9E;" data-original-title="Delete" class="btn btn-sm deleteItem"><i class="fas fa-trash-alt"></i></a>';
+            $actionBtn .= '&nbsp;<a href="javascript:void(0);" id="delete-compnay" onClick="deleteFunc('. $employee->id.' )" data-toggle="tooltip" data-original-title="Delete" class="delete btn btn-danger">
+            Delete
+            </a>';
+
             return $actionBtn;
         })
         ->rawColumns(['action'])
@@ -265,11 +269,18 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $company = Employee::where('id',$request->id)->delete();
+      
+        return Response()->json($company);
+
+
+
         // dd($id); 
-        $data = Employee::findOrFail($id);
-        $data->delete();
+        // $data = Employee::findOrFail($id);
+        // $data->delete();
+        // echo '<div class="alert alert-success">Data deleted</div>';
         // Employee::destroy($id);
         // return redirect()->action('EmployeeController@index');
     }

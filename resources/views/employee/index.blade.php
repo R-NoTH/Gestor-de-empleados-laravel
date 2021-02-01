@@ -2,6 +2,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 @include('layout.header')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <link src="{{ asset('css/fontello.css') }}">
 <style>
@@ -49,6 +50,8 @@
 </div>
 <br>
 <div class="container">
+
+    <div id="message">
 
     <table id="employesDatatable" class="table table-dark" style="color: #ffffff">
         <thead class="" style="background-color:#C06C84;">
@@ -117,6 +120,33 @@
             $(".modal").modal("show");
 
         });
+        // 
+
+        function deleteFunc(id){
+            var token = '{{ csrf_token() }}';
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': token,
+                    'X-Requested-With': 'XMLHttpRequest',
+                }
+            });
+            if (confirm("Delete Record?") == true) {
+            var id = id;
+            alert(id);
+        // ajax
+        $.ajax({
+        type:"POST",
+        url: "{{ url('delete-company')}}",
+        data: { id: id },
+        dataType: 'json',
+        success: function(res){
+        var oTable = $('#employesDatatable').dataTable();
+        oTable.fnDraw(false);
+        }
+        });
+            }
+        }
+
 
     </script>
 </div>
