@@ -16,6 +16,9 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('foto')->nullable();
+            $table->string('image_name');
+            $table->string('image_url');
+            $table->string('public_id_image');
             $table->string('name')->nullable();
             $table->string('documento')->nullable();
             $table->string('sexo')->nullable();

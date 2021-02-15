@@ -1,17 +1,19 @@
 @include('layout.head')
 @include('layout.header')
 <style>
-    body{
+    body {
         background-color: #2a363b;
     }
+
 </style>
 <div class="container">
     <br>
     <div class="card">
         <div class="card-body">
-            <form action="{{ action('EmployeeController@store') }}" method="post">
+            <form action="{{ action('EmployeeController@store') }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
-                <h5 class="card-title text-center" style="font-size: 1.7625rem;line-height: 1.4em;color:#233e55" >Registro de Funcionarios</h5>
+                <h5 class="card-title text-center" style="font-size: 1.7625rem;line-height: 1.4em;color:#233e55">
+                    Registro de Funcionarios</h5>
                 <br>
 
                 <div class="container">
@@ -24,15 +26,37 @@
                             </ul>
                         </div>
                     @endif
+                    @if (session()->has('status'))
+                            <div class="alert alert-info" role="alert">
+                                {{ session()->get('status') }}
+                            </div>
+                        @endif
+                        @if (session()->has('msg'))
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="card-alert card" style="background:#808080;color:white;">
+                                        <div style="margin-left: 10px">
+                                            <p><b>{{ session('msg') }}</b></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     <div class="row">
 
+                        {{-- <div class="col s6">
+                            <label for="foto">Foto</label>
+                            <input type="file" class="form-control" name="image_name" value="{{ old('foto') }}">
+                        </div> --}}
                         <div class="col s6">
                             <label for="foto">Foto</label>
-                            <input type="file" class="form-control" name="foto" value="{{ old('foto') }}">
+                                <input type="file" name="image_name" class="form-control" id="name" value="">
+                            
                         </div>
                         <div class="col s6">
                             <label for="name">Nombre Completo</label>
-                            <input type="text" style="border-radius: 10px;" class="form-control" name="name" value="{{ old('name') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="name"
+                                value="{{ old('name') }}">
                         </div>
                     </div>
                     <br>
@@ -41,12 +65,13 @@
                         <div class="col s6">
                             <label for="documento">Documento</label>
 
-                            <input type="text" style="border-radius: 10px;" class="form-control" name="documento" value="{{ old('documento') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="documento"
+                                value="{{ old('documento') }}">
                         </div>
 
                         <div class="col s6">
                             <label for="sexo">Sexo</label>
-                            <select  class="form-control" name="sexo">
+                            <select class="form-control" name="sexo">
                                 <option selected value="">Escoje un Categoria</option>
                                 <option value="Mujer">Mujer</option>
                                 <option value="Hombre">Hombre</option>
@@ -60,7 +85,8 @@
                         <div class="col s6">
                             <label for="rh">Rh</label>
 
-                            <input type="text" style="border-radius: 10px;" class="form-control" name="rh" value="{{ old('rh') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="rh"
+                                value="{{ old('rh') }}">
                         </div>
 
                         <div class="col s6">
@@ -84,7 +110,8 @@
                         <div class="col s6">
                             <label for="edad">Edad</label>
 
-                            <input type="text" style="border-radius: 10px;" class="form-control"" name=" edad" value="{{ old('edad') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control"" name=" edad"
+                                value="{{ old('edad') }}">
                         </div>
 
                     </div>
@@ -101,7 +128,8 @@
                         <div class="col s6">
                             <label for="direccion">Direccion</label>
 
-                            <input type="text" style="border-radius: 10px;" class="form-control" name="direccion" value="{{ old('direccion') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="direccion"
+                                value="{{ old('direccion') }}">
                         </div>
 
                     </div>
@@ -111,7 +139,8 @@
                         <div class="col s6">
                             <label for="cargo">Cargo</label>
 
-                            <input type="text" style="border-radius: 10px;" class="form-control" name="cargo" value="{{ old('cargo') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control" name="cargo"
+                                value="{{ old('cargo') }}">
                         </div>
 
                         <div class="col s6">
@@ -119,7 +148,8 @@
                             <select class="form-control" name="seccion_id">
                                 <option selected value="">Escoje un Categoria</option>
                                 @foreach ($seccions as $seccion)
-                                    <option name="seccion_id" id="seccion_id" value="{{ $seccion->id }}">{{ $seccion->name }}</option>
+                                    <option name="seccion_id" id="seccion_id" value="{{ $seccion->id }}">
+                                        {{ $seccion->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -131,15 +161,15 @@
                         <div class="col s6">
                             <label for="alergias_medicamento">Alergias a Medicamentos</label>
 
-                            <input type="text" style="border-radius: 10px;" class="form-control" name="alergias_medicamento"
-                                value="{{ old('alergias_medicamento') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control"
+                                name="alergias_medicamento" value="{{ old('alergias_medicamento') }}">
                         </div>
 
                         <div class="col s6">
                             <label for="telefono_emergencia">Telefono de Emergencia</label>
 
-                            <input type="text" style="border-radius: 10px;" class="form-control" name="telefono_emergencia"
-                                value="{{ old('telefono_emergencia') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control"
+                                name="telefono_emergencia" value="{{ old('telefono_emergencia') }}">
                         </div>
 
                     </div>
@@ -149,8 +179,8 @@
                         <div class="col s6">
                             <label for="enfermedad_laboral">Enfermedad Laboral</label>
 
-                            <input type="text" style="border-radius: 10px;" class="form-control" name="enfermedad_laboral"
-                                value="{{ old('enfermedad_laboral') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control"
+                                name="enfermedad_laboral" value="{{ old('enfermedad_laboral') }}">
                         </div>
 
                         <div class="col s6">
@@ -177,8 +207,8 @@
                         <div class="col s6">
                             <label for="accidentes_trabajo">Accidentes Laboral</label>
 
-                            <textarea style="border-radius: 10px;" class="form-control" name="accidentes_trabajo" rows="1"
-                                value="{{ old('accidentes_trabajo') }}"></textarea>
+                            <textarea style="border-radius: 10px;" class="form-control" name="accidentes_trabajo"
+                                rows="1" value="{{ old('accidentes_trabajo') }}"></textarea>
                         </div>
                     </div>
                     <br>
@@ -187,16 +217,16 @@
                         <div class="col s6">
                             <label for="patologia_especial">Patologia Especial</label>
 
-                            <input type="text" style="border-radius: 10px;" class="form-control" name="patologia_especial"
-                                value="{{ old('patologia_especial') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control"
+                                name="patologia_especial" value="{{ old('patologia_especial') }}">
                         </div>
 
 
                         <div class="col s6">
                             <label for="enfermedad_laboral_arl">Enfermedad laboral ARL</label>
 
-                            <input type="text" style="border-radius: 10px;" class="form-control" name="enfermedad_laboral_arl"
-                                value="{{ old('enfermedad_laboral_arl') }}">
+                            <input type="text" style="border-radius: 10px;" class="form-control"
+                                name="enfermedad_laboral_arl" value="{{ old('enfermedad_laboral_arl') }}">
                         </div>
                     </div>
                     <br>
@@ -224,8 +254,7 @@
 
         </form>
 
-        {{-- <a href="#" class="btn btn-primary">Go somewhere</a>
-        --}}
+        {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
     </div>
 </div>
 

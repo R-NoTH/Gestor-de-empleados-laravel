@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Employee;
 use App\Seccion;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+// use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
+use JD\Cloudder\Facades\Cloudder;
+
 
 class EmployeeController extends Controller
 {
@@ -195,8 +200,8 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $this->validate($request, [
+            'image_name'=> 'required|mimes:jpeg,bmp,jpg,png|between:1,6000',
             'name'=> 'required',
             'sexo'=> 'required',
             'rh'=> 'required',
@@ -207,13 +212,56 @@ class EmployeeController extends Controller
             'numero_telefono' => 'integer',
             'telefono_emergencia' => 'integer',
             'rh' => 'max:4',
-        ]);
-        $input = request()->except('_token');
-        // dd($input);
-       
-        Employee::create($input);
+            ]);
+            $input = request()->except('_token');
+
+            $this->uploadImages($request);
+            // dd($input);
+            
+            // Employee::create($input);
 
         return redirect()->action('EmployeeController@index');
+    }
+    public function uploadImages(Request $request)
+    {
+        // se obtiene en una variable lo que trae el request el archivo de tipo file y se extrae el RealPath
+        $image_name = $request->file('image_name');
+        $name = $request->file('image_name')->getClientOriginalName();
+        $image_name = $request->file('image_name')->getRealPath();
+        $image_url = Cloudinary::upload($request->file('image_name')->getRealPath())->getSecurePath();
+        $public_id_image= cloudinary()->getPublicId();
+        $this->saveImages($request, $image_url,$public_id_image);
+        return redirect()->action('EmployeeController@index')->with('status', 'Uploaded Successfully');
+    }
+    public function saveImages(Request $request, $image_url, $public_id_image)
+    {
+        $image = new Employee();
+        // dd($request);
+        $image->image_name = $request->file('image_name')->getClientOriginalName();
+        $image->image_url = $image_url;
+        $image->public_id_image = $public_id_image;
+        $image->name = $request->name;
+        $image->documento = $request->documento;
+        $image->sexo = $request->sexo;
+        $image->rh = $request->rh;
+        $image->fecha_nacimiento = $request->fecha_nacimiento;
+        $image->lugar_nacimiento = $request->lugar_nacimiento;
+        $image->edad = $request->edad;
+        $image->numero_telefono = $request->numero_telefono;
+        $image->direccion = $request->direccion;
+        $image->cargo = $request->cargo;
+        $image->seccion_id = $request->seccion_id;
+        $image->covid = $request->covid;
+        $image->alergias_medicamento = $request->alergias_medicamento;
+        $image->telefono_emergencia = $request->telefono_emergencia;
+        $image->enfermedad_laboral = $request->enfermedad_laboral;
+        $image->accidentes_trabajo = $request->accidentes_trabajo;
+        $image->enfermedad_comun = $request->enfermedad_comun;
+        $image->patologia_especial = $request->patologia_especial;
+        $image->enfermedad_laboral_arl = $request->enfermedad_laboral_arl;
+        $image->gestantes = $request->gestantes;
+        $image->lactantes = $request->lactantes;
+        $image->save();
     }
 
     /**
