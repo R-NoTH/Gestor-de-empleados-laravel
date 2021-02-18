@@ -29,10 +29,13 @@
 </style>
 <div class="container">
 
-    <br>
+   
     <div class="card" style="background-color: #2a363b;" >
         {{-- <h5 >Edit del Empleado</h5> --}}
         <h5 class="card-title text-center" style="font-size: 1.7625rem;line-height: 1.4em;color:#ffffff" >Show del Funcionarios</h5>
+        <div class="text-center">
+          <img src="{{ $imagen }}" style="height:150px; border-radius: 50%; margin: 15px;"class="img-raised rounded-circle img-fluid" alt="...">
+        </div>
         <table id="table_id" class="table table-bordered table-dark">
           <thead>
             <tr>

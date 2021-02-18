@@ -11,7 +11,7 @@
     <div class="card">
         <h5 class="card-title text-center" style="font-size: 1.7625rem;line-height: 1.4em;color:#233e55">Edit del Funcionarios</h5>
         <div class="card-body">
-            <form action="{{ action('EmployeeController@update', $data->id) }}" method="post">
+            <form action="{{ action('EmployeeController@update', $data->id) }}" method="post" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 @method('PUT')
                 <div class="container">
@@ -28,8 +28,7 @@
 
                         <div class="col s6">
                             <label for="foto">Foto</label>
-                            <input type="text" class="form-control" name="foto"
-                                value="{{ $data->foto }}">
+                            <input type="file" class="form-control" name="image_name" value="">
                         </div>
                         <div class="col s6">
                             <label for="name">Nombre</label>

@@ -200,6 +200,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $this->validate($request, [
             'image_name'=> 'required|mimes:jpeg,bmp,jpg,png|between:1,6000',
             'name'=> 'required',
@@ -228,6 +229,8 @@ class EmployeeController extends Controller
         $image_name = $request->file('image_name');
         $name = $request->file('image_name')->getClientOriginalName();
         $image_name = $request->file('image_name')->getRealPath();
+        dd($request->file('image_name')->getRealPath());
+
         $image_url = Cloudinary::upload($request->file('image_name')->getRealPath())->getSecurePath();
         $public_id_image= cloudinary()->getPublicId();
         $this->saveImages($request, $image_url,$public_id_image);
@@ -273,9 +276,11 @@ class EmployeeController extends Controller
     public function show($id)
     {   
         $data = Employee::find($id);
+        $imagen =$data->image_url;
+        // dd($data->image_url);
 
         // dd($data->seccion->name);
-        return view('employee.show',compact('data'));
+        return view('employee.show',compact('data','imagen'));
     }
 
     /**
@@ -286,10 +291,10 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
+        $data = Employee::find($id);
 
-       $data = Employee::find($id);
+        // dd($data->image_name);
        $seccions=Seccion::all(); 
-    //    dd();
         return view('employee.edit',compact('data','seccions'));
     }
 
@@ -303,8 +308,14 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
        $data = Employee::findOrFail($id);
-
+       if ($request->file('image_name') ) {
+        $publicIdImage = $data->public_id_image;
+        Cloudinary::destroy($publicIdImage);
+        $this->updateImages($request,$data);
+       }
+      
         $this->validate($request, [
+            // 'image_name'=> 'required|mimes:jpeg,bmp,jpg,png|between:1,6000',
             'documento' => 'integer',
             'edad' => 'integer',
             'numero_telefono' => 'integer',
@@ -313,12 +324,96 @@ class EmployeeController extends Controller
             
            
         ]);
-
         $input = $request->all();
        
         $data->fill($input)->save();
 
         return redirect()->action('EmployeeController@index');
+    }
+    public function updateImages(Request $request,Employee $data)
+    {
+        $image_name = $request->file('image_name');
+        $name = $request->file('image_name')->getClientOriginalName();
+        $image_name = $request->file('image_name')->getRealPath();
+        $image_url = Cloudinary::upload($request->file('image_name')->getRealPath())->getSecurePath();
+        // dd($image_url);
+        $public_id_image= cloudinary()->getPublicId();
+        $this->updateInputs($request, $image_url,$public_id_image,$data);
+        return redirect()->action('EmployeeController@index');
+    }
+    public function updateInputs($request, $image_url,$public_id_image ,Employee $data){
+        if ($request->has('image_name')) {
+            $data->image_name = $request->file('image_name')->getClientOriginalName();
+        }
+        
+            $data->image_url = $image_url;
+        
+            $data->public_id_image = $public_id_image;
+      
+        if ($request->has('name')) {
+            $data->name = $request->name;
+        }
+        if ($request->has('documento')) {
+            $data->documento = $request->documento;
+        }
+        if ($request->has('sexo')) {
+            $data->sexo = $request->sexo;
+        }
+        if ($request->has('rh')) {
+            $data->rh = $request->rh;
+        }
+        if ($request->has('fecha_nacimiento')) {
+            $data->fecha_nacimiento = $request->fecha_nacimiento;
+        }
+        if ($request->has('lugar_nacimiento')) {
+            $data->lugar_nacimiento = $request->lugar_nacimiento;
+        }
+        if ($request->has('edad')) {
+            $data->edad = $request->edad;
+        }
+        if ($request->has('numero_telefono')) {
+            $data->numero_telefono = $request->numero_telefono;
+        }
+        if ($request->has('direccion')) {
+            $data->direccion = $request->direccion;
+        }
+        if ($request->has('cargo')) {
+            $data->cargo = $request->cargo;
+        }
+        if ($request->has('seccion_id')) {
+            $data->seccion_id = $request->seccion_id;
+        }
+        if ($request->has('covid')) {
+            $data->covid = $request->covid;
+        }
+        if ($request->has('alergias_medicamento')) {
+            $data->alergias_medicamento = $request->alergias_medicamento;
+        }
+        if ($request->has('telefono_emergencia')) {
+            $data->telefono_emergencia = $request->telefono_emergencia;
+        }
+        if ($request->has('enfermedad_laboral')) {
+            $data->enfermedad_laboral = $request->enfermedad_laboral;
+        }
+        if ($request->has('accidentes_trabajo')) {
+            $data->accidentes_trabajo = $request->accidentes_trabajo;
+        }
+        if ($request->has('enfermedad_comun')) {
+            $data->enfermedad_comun = $request->enfermedad_comun;
+        }
+        if ($request->has('patologia_especial')) {
+            $data->patologia_especial = $request->patologia_especial;
+        }
+        if ($request->has('enfermedad_laboral_arl')) {
+            $data->enfermedad_laboral_arl = $request->enfermedad_laboral_arl;
+        }
+        if ($request->has('gestantes')) {
+            $data->gestantes = $request->gestantes;
+        }
+        if ($request->has('lactantes')) {
+            $data->lactantes = $request->lactantes;
+        }
+
     }
 
     /**
